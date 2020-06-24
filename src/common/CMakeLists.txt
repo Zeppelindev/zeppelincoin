@@ -86,8 +86,7 @@ set(common_private_headers
   updates.h
   aligned.h
   timings.h
-  combinator.h
-  utf8.h)
+  combinator.h)
 
 monero_private_headers(common
   ${common_private_headers})

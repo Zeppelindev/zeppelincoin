@@ -1,5 +1,5 @@
 # Copyright (c) 2014-2019, The Monero Project
-#
+# Copyright (c) 2020, The Zeppelin Project
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification, are
@@ -94,5 +94,5 @@ target_link_libraries(daemon
     ${Blocks})
 set_property(TARGET daemon
   PROPERTY
-    OUTPUT_NAME "monerod")
+    OUTPUT_NAME "Zeppelind")
 install(TARGETS daemon DESTINATION bin)

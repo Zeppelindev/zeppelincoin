@@ -1,5 +1,5 @@
 // Copyright (c) 2014-2019, The Monero Project
-// 
+// Copyright (c) 2019-2020, The Zeppelin Project
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are
@@ -171,7 +171,7 @@ namespace
   const command_line::arg_descriptor<bool> arg_allow_mismatched_daemon_version = {"allow-mismatched-daemon-version", sw::tr("Allow communicating with a daemon that uses a different RPC version"), false};
   const command_line::arg_descriptor<uint64_t> arg_restore_height = {"restore-height", sw::tr("Restore from specific blockchain height"), 0};
   const command_line::arg_descriptor<std::string> arg_restore_date = {"restore-date", sw::tr("Restore from estimated blockchain height on specified date"), ""};
-  const command_line::arg_descriptor<bool> arg_do_not_relay = {"do-not-relay", sw::tr("The newly created transaction will not be relayed to the monero network"), false};
+  const command_line::arg_descriptor<bool> arg_do_not_relay = {"do-not-relay", sw::tr("The newly created transaction will not be relayed to the Zeppelin network"), false};
   const command_line::arg_descriptor<bool> arg_create_address_file = {"create-address-file", sw::tr("Create an address file for new wallets"), false};
   const command_line::arg_descriptor<std::string> arg_subaddress_lookahead = {"subaddress-lookahead", tools::wallet2::tr("Set subaddress lookahead sizes to <major>:<minor>"), ""};
   const command_line::arg_descriptor<bool> arg_use_english_language_names = {"use-english-language-names", sw::tr("Display English language names"), false};
@@ -241,7 +241,7 @@ namespace
   const char* USAGE_MMS("mms [<subcommand> [<subcommand_parameters>]]");
   const char* USAGE_MMS_INIT("mms init <required_signers>/<authorized_signers> <own_label> <own_transport_address>");
   const char* USAGE_MMS_INFO("mms info");
-  const char* USAGE_MMS_SIGNER("mms signer [<number> <label> [<transport_address> [<monero_address>]]]");
+  const char* USAGE_MMS_SIGNER("mms signer [<number> <label> [<transport_address> [<Zeppelin_address>]]]");
   const char* USAGE_MMS_LIST("mms list");
   const char* USAGE_MMS_NEXT("mms next [sync]");
   const char* USAGE_MMS_SYNC("mms sync");
@@ -255,7 +255,6 @@ namespace
   const char* USAGE_MMS_SET("mms set <option_name> [<option_value>]");
   const char* USAGE_MMS_SEND_SIGNER_CONFIG("mms send_signer_config");
   const char* USAGE_MMS_START_AUTO_CONFIG("mms start_auto_config [<label> <label> ...]");
-  const char* USAGE_MMS_CONFIG_CHECKSUM("mms config_checksum");
   const char* USAGE_MMS_STOP_AUTO_CONFIG("mms stop_auto_config");
   const char* USAGE_MMS_AUTO_CONFIG("mms auto_config <auto_config_token>");
   const char* USAGE_PRINT_RING("print_ring <key_image> | <txid>");
@@ -469,7 +468,7 @@ namespace
     std::stringstream prompt;
     prompt << sw::tr("For URL: ") << url
            << ", " << dnssec_str << std::endl
-           << sw::tr(" Monero Address = ") << addresses[0]
+           << sw::tr(" Zeppelin Address = ") << addresses[0]
            << std::endl
            << sw::tr("Is this OK?")
     ;
@@ -1643,7 +1642,7 @@ bool simple_wallet::export_raw_multisig(const std::vector<std::string> &args)
     for (auto &ptx: txs.m_ptx)
     {
       const crypto::hash txid = cryptonote::get_transaction_hash(ptx.tx);
-      const std::string filename = std::string("raw_multisig_monero_tx_") + epee::string_tools::pod_to_hex(txid);
+      const std::string filename = std::string("raw_multisig_Zeppelin_tx_") + epee::string_tools::pod_to_hex(txid);
       if (!filenames.empty())
         filenames += ", ";
       filenames += filename;
@@ -2288,25 +2287,25 @@ bool simple_wallet::public_nodes(const std::vector<std::string> &args)
 
 bool simple_wallet::welcome(const std::vector<std::string> &args)
 {
-  message_writer() << tr("Welcome to Monero, the private cryptocurrency.");
+  message_writer() << tr("Welcome to Zeppelin, the private cryptocurrency.");
   message_writer() << "";
-  message_writer() << tr("Monero, like Bitcoin, is a cryptocurrency. That is, it is digital money.");
-  message_writer() << tr("Unlike Bitcoin, your Monero transactions and balance stay private and are not visible to the world by default.");
+  message_writer() << tr("Zeppelin, like Bitcoin, is a cryptocurrency. That is, it is digital money.");
+  message_writer() << tr("Unlike Bitcoin, your Zeppelin transactions and balance stay private and are not visible to the world by default.");
   message_writer() << tr("However, you have the option of making those available to select parties if you choose to.");
   message_writer() << "";
-  message_writer() << tr("Monero protects your privacy on the blockchain, and while Monero strives to improve all the time,");
-  message_writer() << tr("no privacy technology can be 100% perfect, Monero included.");
-  message_writer() << tr("Monero cannot protect you from malware, and it may not be as effective as we hope against powerful adversaries.");
-  message_writer() << tr("Flaws in Monero may be discovered in the future, and attacks may be developed to peek under some");
-  message_writer() << tr("of the layers of privacy Monero provides. Be safe and practice defense in depth.");
+  message_writer() << tr("Zeppelin protects your privacy on the blockchain, and while Zeppelin strives to improve all the time,");
+  message_writer() << tr("no privacy technology can be 100% perfect, Zeppelin included.");
+  message_writer() << tr("Zeppelin cannot protect you from malware, and it may not be as effective as we hope against powerful adversaries.");
+  message_writer() << tr("Flaws in Zeppelin may be discovered in the future, and attacks may be developed to peek under some");
+  message_writer() << tr("of the layers of privacy Zeppelin provides. Be safe and practice defense in depth.");
   message_writer() << "";
-  message_writer() << tr("Welcome to Monero and financial privacy. For more information see https://GetMonero.org");
+  message_writer() << tr("Welcome to Zeppelin and financial privacy. For more information see updating");
   return true;
 }
 
 bool simple_wallet::version(const std::vector<std::string> &args)
 {
-  message_writer() << "Monero '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")";
+  message_writer() << "Zeppelin '" << MONERO_RELEASE_NAME << "' (v" << MONERO_VERSION_FULL << ")";
   return true;
 }
 
@@ -3047,15 +3046,15 @@ bool simple_wallet::help(const std::vector<std::string> &args/* = std::vector<st
   message_writer() << tr("Commands:");
   message_writer() << "";
   message_writer() << tr("\"welcome\" - Read welcome message.");
-  message_writer() << tr("\"donate <amount>\" - Donate XMR to the development team.");
+  message_writer() << tr("\"donate <amount>\" - Donate LZN to the development team.");
   message_writer() << tr("\"balance\" - Show balance.");
   message_writer() << tr("\"address new\" - Create new subaddress.");
   message_writer() << tr("\"address all\" - Show all addresses.");
-  message_writer() << tr("\"transfer <address> <amount>\" - Send XMR to an address.");
+  message_writer() << tr("\"transfer <address> <amount>\" - Send LZN to an address.");
   message_writer() << tr("\"show_transfers [in|out|pending|failed|pool]\" - Show transactions.");
   message_writer() << tr("\"sweep_all <address>\" - Send whole balance to another wallet.");
   message_writer() << tr("\"seed\" - Show secret 25 words that can be used to recover this wallet.");
-  message_writer() << tr("\"refresh\" - Synchronize wallet with the Monero network.");
+  message_writer() << tr("\"refresh\" - Synchronize wallet with the Zeppelin network.");
   message_writer() << tr("\"status\" - Check current status of wallet.");
   message_writer() << tr("\"version\" - Check software version.");
   message_writer() << tr("\"help_advanced\" - Show list with more available commands.");
@@ -3466,7 +3465,7 @@ simple_wallet::simple_wallet()
                            tr("Interface with the MMS (Multisig Messaging System)\n"
                               "<subcommand> is one of:\n"
                               "  init, info, signer, list, next, sync, transfer, delete, send, receive, export, note, show, set, help\n"
-                              "  send_signer_config, start_auto_config, stop_auto_config, auto_config, config_checksum\n"
+                              "  send_signer_config, start_auto_config, stop_auto_config, auto_config\n"
                               "Get help about a subcommand with: help_advanced mms <subcommand>"));
   m_cmd_binder.set_handler("mms init",
                            boost::bind(&simple_wallet::on_command, this, &simple_wallet::mms, _1),
@@ -3535,10 +3534,6 @@ simple_wallet::simple_wallet()
                            boost::bind(&simple_wallet::on_command, this, &simple_wallet::mms, _1),
                            tr(USAGE_MMS_START_AUTO_CONFIG),
                            tr("Start auto-config at the auto-config manager's wallet by issuing auto-config tokens and optionally set others' labels"));
-  m_cmd_binder.set_handler("mms config_checksum",
-                           boost::bind(&simple_wallet::on_command, this, &simple_wallet::mms, _1),
-                           tr(USAGE_MMS_CONFIG_CHECKSUM),
-                           tr("Get a checksum that allows signers to easily check for identical MMS configuration"));
   m_cmd_binder.set_handler("mms stop_auto_config",
                            boost::bind(&simple_wallet::on_command, this, &simple_wallet::mms, _1),
                            tr(USAGE_MMS_STOP_AUTO_CONFIG),
@@ -4543,7 +4538,7 @@ bool simple_wallet::init(const boost::program_options::variables_map& vm)
     bool ssl = false;
     if (m_wallet->check_connection(NULL, &ssl) && !ssl)
       message_writer(console_color_red, true) << boost::format(tr("Using your own without SSL exposes your RPC traffic to monitoring"));
-    message_writer(console_color_red, true) << boost::format(tr("You are strongly encouraged to connect to the Monero network using your own daemon"));
+    message_writer(console_color_red, true) << boost::format(tr("You are strongly encouraged to connect to the Zeppelin network using your own daemon"));
     message_writer(console_color_red, true) << boost::format(tr("If you or someone you trust are operating this daemon, you can use --trusted-daemon"));
 
     COMMAND_RPC_GET_INFO::request req;
@@ -4564,7 +4559,7 @@ bool simple_wallet::init(const boost::program_options::variables_map& vm)
     check_background_mining(password);
 
   if (welcome)
-    message_writer(console_color_yellow, true) << tr("If you are new to Monero, type \"welcome\" for a brief overview.");
+    message_writer(console_color_yellow, true) << tr("If you are new to Zeppelin, type \"welcome\" for a brief overview.");
 
   m_last_activity_time = time(NULL);
   return true;
@@ -4783,7 +4778,7 @@ boost::optional<epee::wipeable_string> simple_wallet::new_wallet(const boost::pr
     "Use the \"help\" command to see a simplified list of available commands.\n"
     "Use the \"help_advanced\" command to see an advanced list of available commands.\n"
     "Use \"help_advanced <command>\" to see a command's documentation.\n"
-    "Always use the \"exit\" command when closing monero-wallet-cli to save \n"
+    "Always use the \"exit\" command when closing Zeppelin-wallet-cli to save \n"
     "your current session's state. Otherwise, you might need to synchronize \n"
     "your wallet again (your wallet keys are NOT at risk in any case).\n")
   ;
@@ -5157,7 +5152,7 @@ void simple_wallet::start_background_mining()
       return;
     }
   }
-  success_msg_writer() << tr("Background mining enabled. Thank you for supporting the Monero network.");
+  success_msg_writer() << tr("Background mining enabled. Thank you for supporting the Zeppelin network.");
 }
 //----------------------------------------------------------------------------------------------------
 void simple_wallet::stop_background_mining()
@@ -5229,7 +5224,7 @@ void simple_wallet::check_background_mining(const epee::wipeable_string &passwor
   {
     message_writer() << tr("The daemon is not set up to background mine.");
     message_writer() << tr("With background mining enabled, the daemon will mine when idle and not on battery.");
-    message_writer() << tr("Enabling this supports the network you are using, and makes you eligible for receiving new monero");
+    message_writer() << tr("Enabling this supports the network you are using, and makes you eligible for receiving new Zeppelin");
     std::string accepted = input_line(tr("Do you want to do it now? (Y/Yes/N/No): "));
     if (std::cin.eof() || !command_line::is_yes(accepted)) {
       m_wallet->setup_background_mining(tools::wallet2::BackgroundMiningNo);
@@ -5476,7 +5471,7 @@ void simple_wallet::on_new_block(uint64_t height, const cryptonote::block& block
     m_refresh_progress_reporter.update(height, false);
 }
 //----------------------------------------------------------------------------------------------------
-void simple_wallet::on_money_received(uint64_t height, const crypto::hash &txid, const cryptonote::transaction& tx, uint64_t amount, const cryptonote::subaddress_index& subaddr_index, bool is_change, uint64_t unlock_time)
+void simple_wallet::on_money_received(uint64_t height, const crypto::hash &txid, const cryptonote::transaction& tx, uint64_t amount, const cryptonote::subaddress_index& subaddr_index, uint64_t unlock_time)
 {
   if (m_locked)
     return;
@@ -5487,7 +5482,7 @@ void simple_wallet::on_money_received(uint64_t height, const crypto::hash &txid,
     tr("idx ") << subaddr_index;
 
   const uint64_t warn_height = m_wallet->nettype() == TESTNET ? 1000000 : m_wallet->nettype() == STAGENET ? 50000 : 1650000;
-  if (height >= warn_height && !is_change)
+  if (height >= warn_height)
   {
     std::vector<tx_extra_field> tx_extra_fields;
     parse_tx_extra(tx.extra, tx_extra_fields); // failure ok
@@ -6258,7 +6253,7 @@ void simple_wallet::check_for_inactivity_lock(bool user)
     m_in_command = true;
     if (!user)
     {
-      const std::string speech = tr("I locked your Monero wallet to protect you while you were away\nsee \"help_advanced set\" to configure/disable");
+      const std::string speech = tr("I locked your Zeppelin wallet to protect you while you were away\nsee \"help_advanced set\" to configure/disable");
       std::vector<std::pair<std::string, size_t>> lines = tools::split_string_by_width(speech, 45);
 
       size_t max_len = 0;
@@ -6451,7 +6446,7 @@ bool simple_wallet::transfer_main(int transfer_type, const std::vector<std::stri
     }
     else
     {
-      if (boost::starts_with(local_args[i], "monero:"))
+      if (boost::starts_with(local_args[i], "Zeppelin:"))
         fail_msg_writer() << tr("Invalid last argument: ") << local_args.back() << ": " << error;
       else
         fail_msg_writer() << tr("Invalid last argument: ") << local_args.back();
@@ -6688,7 +6683,7 @@ bool simple_wallet::transfer_main(int transfer_type, const std::vector<std::stri
     }
     else if (m_wallet->multisig())
     {
-      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_monero_tx");
+      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
@@ -6696,7 +6691,7 @@ bool simple_wallet::transfer_main(int transfer_type, const std::vector<std::stri
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_Zeppelin_tx";
       }
     }
     else if (m_wallet->get_account().get_device().has_tx_cold_sign())
@@ -6725,7 +6720,7 @@ bool simple_wallet::transfer_main(int transfer_type, const std::vector<std::stri
     }
     else if (m_wallet->watch_only())
     {
-      bool r = m_wallet->save_tx(ptx_vector, "unsigned_monero_tx");
+      bool r = m_wallet->save_tx(ptx_vector, "unsigned_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
@@ -6733,7 +6728,7 @@ bool simple_wallet::transfer_main(int transfer_type, const std::vector<std::stri
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_Zeppelin_tx";
       }
     }
     else
@@ -6827,26 +6822,26 @@ bool simple_wallet::sweep_unmixable(const std::vector<std::string> &args_)
     // actually commit the transactions
     if (m_wallet->multisig())
     {
-      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_monero_tx");
+      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_Zeppelin_tx";
       }
     }
     else if (m_wallet->watch_only())
     {
-      bool r = m_wallet->save_tx(ptx_vector, "unsigned_monero_tx");
+      bool r = m_wallet->save_tx(ptx_vector, "unsigned_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_Zeppelin_tx";
       }
     }
     else
@@ -7131,14 +7126,14 @@ bool simple_wallet::sweep_main(uint32_t account, uint64_t below, bool locked, co
     // actually commit the transactions
     if (m_wallet->multisig())
     {
-      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_monero_tx");
+      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_Zeppelin_tx";
       }
     }
     else if (m_wallet->get_account().get_device().has_tx_cold_sign())
@@ -7168,14 +7163,14 @@ bool simple_wallet::sweep_main(uint32_t account, uint64_t below, bool locked, co
     }
     else if (m_wallet->watch_only())
     {
-      bool r = m_wallet->save_tx(ptx_vector, "unsigned_monero_tx");
+      bool r = m_wallet->save_tx(ptx_vector, "unsigned_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_Zeppelin_tx";
       }
     }
     else
@@ -7366,26 +7361,26 @@ bool simple_wallet::sweep_single(const std::vector<std::string> &args_)
     // actually commit the transactions
     if (m_wallet->multisig())
     {
-      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_monero_tx");
+      bool r = m_wallet->save_multisig_tx(ptx_vector, "multisig_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "multisig_Zeppelin_tx";
       }
     }
     else if (m_wallet->watch_only())
     {
-      bool r = m_wallet->save_tx(ptx_vector, "unsigned_monero_tx");
+      bool r = m_wallet->save_tx(ptx_vector, "unsigned_Zeppelin_tx");
       if (!r)
       {
         fail_msg_writer() << tr("Failed to write transaction(s) to file");
       }
       else
       {
-        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_monero_tx";
+        success_msg_writer(true) << tr("Unsigned transaction(s) successfully written to file: ") << "unsigned_Zeppelin_tx";
       }
     }
     else
@@ -7505,7 +7500,7 @@ bool simple_wallet::donate(const std::vector<std::string> &args_)
   if (!payment_id_str.empty())
     local_args.push_back(payment_id_str);
   if (m_wallet->nettype() == cryptonote::MAINNET)
-    message_writer() << (boost::format(tr("Donating %s %s to The Monero Project (donate.getmonero.org or %s).")) % amount_str % cryptonote::get_unit(cryptonote::get_default_decimal_point()) % MONERO_DONATION_ADDR).str();
+    message_writer() << (boost::format(tr("Donating %s %s to The Zeppelin Project (donate.getmonero.org or %s).")) % amount_str % cryptonote::get_unit(cryptonote::get_default_decimal_point()) % MONERO_DONATION_ADDR).str();
   else
     message_writer() << (boost::format(tr("Donating %s %s to %s.")) % amount_str % cryptonote::get_unit(cryptonote::get_default_decimal_point()) % address_str).str();
   transfer(local_args);
@@ -10292,11 +10287,11 @@ int main(int argc, char* argv[])
   std::tie(vm, should_terminate) = wallet_args::main(
    argc, argv,
    "monero-wallet-cli [--wallet-file=<filename>|--generate-new-wallet=<filename>] [<COMMAND>]",
-    sw::tr("This is the command line monero wallet. It needs to connect to a monero\ndaemon to work correctly.\nWARNING: Do not reuse your Monero keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy."),
+    sw::tr("This is the command line Zeppelin wallet. It needs to connect to a Zeppelin\ndaemon to work correctly.\nWARNING: Do not reuse your Zeppelin keys on another fork, UNLESS this fork has key reuse mitigations built in. Doing so will harm your privacy."),
     desc_params,
     positional_options,
     [](const std::string &s, bool emphasis){ tools::scoped_message_writer(emphasis ? epee::console_color_white : epee::console_color_default, true) << s; },
-    "monero-wallet-cli.log"
+    "Zeppelin-wallet-cli.log"
   );
 
   if (!vm)
@@ -10369,14 +10364,6 @@ bool simple_wallet::user_confirms(const std::string &question)
 {
    std::string answer = input_line(question + tr(" (Y/Yes/N/No): "));
    return !std::cin.eof() && command_line::is_yes(answer);
-}
-
-bool simple_wallet::user_confirms_auto_config()
-{
-  message_writer(console_color_red, true) << tr("WARNING: Using MMS auto-config mechanisms is not trustless");
-  message_writer() << tr("A malicious auto-config manager could send you info about own wallets instead of other signers' info");
-  message_writer() << tr("If in doubt do not use auto-config or at least compare configs using the \"mms config_checksum\" command");
-  return user_confirms("Accept the risks and continue?");
 }
 
 bool simple_wallet::get_number_from_arg(const std::string &arg, uint32_t &number, const uint32_t lower_bound, const uint32_t upper_bound)
@@ -10483,7 +10470,7 @@ void simple_wallet::list_mms_messages(const std::vector<mms::message> &messages)
 void simple_wallet::list_signers(const std::vector<mms::authorized_signer> &signers)
 {
   message_writer() << boost::format("%2s %-20s %-s") % tr("#") % tr("Label") % tr("Transport Address");
-  message_writer() << boost::format("%2s %-20s %-s") % "" % tr("Auto-Config Token") % tr("Monero Address");
+  message_writer() << boost::format("%2s %-20s %-s") % "" % tr("Auto-Config Token") % tr("Zeppelin Address");
   for (size_t i = 0; i < signers.size(); ++i)
   {
     const mms::authorized_signer &signer = signers[i];
@@ -10531,7 +10518,7 @@ void simple_wallet::show_message(const mms::message &m)
   case mms::message_type::additional_key_set:
   case mms::message_type::note:
     display_content = true;
-    sanitized_text = mms::message_store::get_sanitized_text(m.content, 1000);
+    ms.get_sanitized_message_text(m, sanitized_text);
     break;
   default:
     display_content = false;
@@ -10689,7 +10676,7 @@ void simple_wallet::mms_signer(const std::vector<std::string> &args)
   }
   if ((args.size() < 2) || (args.size() > 4))
   {
-    fail_msg_writer() << tr("mms signer [<number> <label> [<transport_address> [<monero_address>]]]");
+    fail_msg_writer() << tr("mms signer [<number> <label> [<transport_address> [<Zeppelin_address>]]]");
     return;
   }
 
@@ -10708,14 +10695,14 @@ void simple_wallet::mms_signer(const std::vector<std::string> &args)
     bool ok = cryptonote::get_account_address_from_str_or_url(info, m_wallet->nettype(), args[3], oa_prompter);
     if (!ok)
     {
-      fail_msg_writer() << tr("Invalid Monero address");
+      fail_msg_writer() << tr("Invalid Zeppelin address");
       return;
     }
     monero_address = info.address;
     const std::vector<mms::message> &messages = ms.get_all_messages();
     if ((messages.size() > 0) || state.multisig)
     {
-      fail_msg_writer() << tr("Wallet state does not allow changing Monero addresses anymore");
+      fail_msg_writer() << tr("Wallet state does not allow changing Zeppelin addresses anymore");
       return;
     }
   }
@@ -10878,11 +10865,6 @@ void simple_wallet::mms_next(const std::vector<std::string> &args)
         list_signers(signers);
         if (!user_confirms(tr("Replace current signer config with the one displayed above?")))
         {
-          break;
-        }
-        if (!user_confirms_auto_config())
-        {
-          message_writer() << tr("You can use the \"mms delete\" command to delete any unwanted message");
           break;
         }
       }
@@ -11211,18 +11193,6 @@ void simple_wallet::mms_start_auto_config(const std::vector<std::string> &args)
   list_signers(ms.get_all_signers());
 }
 
-void simple_wallet::mms_config_checksum(const std::vector<std::string> &args)
-{
-  if (args.size() != 0)
-  {
-    fail_msg_writer() << tr("Usage: mms config_checksum");
-    return;
-  }
-  mms::message_store& ms = m_wallet->get_message_store();
-  LOCK_IDLE_SCOPE();
-  message_writer() << ms.get_config_checksum();
-}
-
 void simple_wallet::mms_stop_auto_config(const std::vector<std::string> &args)
 {
   if (args.size() != 0)
@@ -11251,10 +11221,6 @@ void simple_wallet::mms_auto_config(const std::vector<std::string> &args)
   if (!ms.check_auto_config_token(args[0], adjusted_token))
   {
     fail_msg_writer() << tr("Invalid auto-config token");
-    return;
-  }
-  if (!user_confirms_auto_config())
-  {
     return;
   }
   mms::authorized_signer me = ms.get_signer(0);
@@ -11368,10 +11334,6 @@ bool simple_wallet::mms(const std::vector<std::string> &args)
     else if (sub_command == "start_auto_config")
     {
       mms_start_auto_config(mms_args);
-    }
-    else if (sub_command == "config_checksum")
-    {
-      mms_config_checksum(mms_args);
     }
     else if (sub_command == "stop_auto_config")
     {

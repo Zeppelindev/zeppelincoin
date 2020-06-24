@@ -361,7 +361,7 @@ std::tuple<bool, std::string, std::string, std::string, std::string> WalletManag
     }
 
     std::string version, hash;
-    MDEBUG("Checking for a new " << software << " version for " << buildtag);
+ //   MDEBUG("Checking for a new " << software << " version for " << buildtag);
     if (!tools::check_updates(software, buildtag, version, hash))
       return std::make_tuple(false, "", "", "", "");
 
@@ -369,8 +369,8 @@ std::tuple<bool, std::string, std::string, std::string, std::string> WalletManag
     {
       std::string user_url = tools::get_update_url(software, subdir, buildtag, version, true);
       std::string auto_url = tools::get_update_url(software, subdir, buildtag, version, false);
-      MGINFO("Version " << version << " of " << software << " for " << buildtag << " is available: " << user_url << ", SHA256 hash " << hash);
-      return std::make_tuple(true, version, hash, user_url, auto_url);
+ //     MGINFO("Version " << version << " of " << software << " for " << buildtag << " is available: " << user_url << ", SHA256 hash " << hash);
+     return std::make_tuple(true, version, hash, user_url, auto_url);
     }
     return std::make_tuple(false, "", "", "", "");
 }

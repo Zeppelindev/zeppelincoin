@@ -120,7 +120,7 @@ void read_hex(const rapidjson::Value& val, epee::span<std::uint8_t> dest)
     throw WRONG_TYPE("string");
   }
 
-  if (!epee::from_hex::to_buffer(dest, {val.GetString(), val.GetStringLength()}))
+  if (!epee::from_hex::to_buffer(dest, {val.GetString(), val.Size()}))
   {
     throw BAD_INPUT();
   }

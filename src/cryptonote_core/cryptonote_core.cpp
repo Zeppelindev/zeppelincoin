@@ -1728,7 +1728,7 @@ namespace cryptonote
       return true;
 
     std::string version, hash;
-    MCDEBUG("updates", "Checking for a new " << software << " version for " << buildtag);
+    //MCDEBUG("updates", "Checking for a new " << software << " version for " << buildtag);
     if (!tools::check_updates(software, buildtag, version, hash))
       return false;
 
@@ -1739,7 +1739,7 @@ namespace cryptonote
     }
 
     std::string url = tools::get_update_url(software, subdir, buildtag, version, true);
-    MCLOG_CYAN(el::Level::Info, "global", "Version " << version << " of " << software << " for " << buildtag << " is available: " << url << ", SHA256 hash " << hash);
+   // MCLOG_CYAN(el::Level::Info, "global", "Version " << version << " of " << software << " for " << buildtag << " is available: " << url << ", SHA256 hash " << hash);
     m_update_available = true;
 
     if (check_updates_level == UPDATES_NOTIFY)
